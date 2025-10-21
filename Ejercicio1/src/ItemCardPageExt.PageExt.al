@@ -2,31 +2,36 @@ pageextension 50100 "Item Card Page Ext" extends "Item Card"
 {
     layout
     {
-        addafter(VariantMandatoryDefaultNo)
+        addlast(Item)
         {
-            field(Brand; Rec.Brand)
+            group("Chronus Customization")
             {
-                ApplicationArea = All;
-            }
+                Caption = 'Chronus Customization';
+                field(Brand; Rec.Brand)
+                {
+                    ApplicationArea = All;
+                }
 
-            field("Brand Description"; Rec."Brand Description")
-            {
-                ApplicationArea = All;
-            }
+                field("Brand Description"; Rec."Brand Description")
+                {
+                    ApplicationArea = All;
+                }
 
-            field("Flavour"; Rec.Flavour)
-            {
-                ApplicationArea = All;
-            }
+                field("Flavour"; Rec.Flavour)
+                {
+                    ApplicationArea = All;
+                }
 
-            field("Flavour Description"; Rec."Flavour Description")
-            {
-                ApplicationArea = All;
-            }
+                field("Flavour Description"; Rec."Flavour Description")
+                {
+                    ApplicationArea = All;
 
-            field("Nutriscore"; Rec.Nutriscore)
-            {
-                ApplicationArea = All;
+                }
+
+                field("Nutriscore"; Rec.Nutriscore)
+                {
+                    ApplicationArea = All;
+                }
             }
 
         }
@@ -34,7 +39,7 @@ pageextension 50100 "Item Card Page Ext" extends "Item Card"
 
     actions
     {
-        addlast(navigation)
+        addafter(ApplyTemplate)
         {
             action("Open Brand")
             {
@@ -42,10 +47,13 @@ pageextension 50100 "Item Card Page Ext" extends "Item Card"
                 Caption = 'Open Brand';
                 Image = Open;
                 ToolTip = 'Pressing this button will open the brand page.';
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 var
-                    BrandPage: Page "Brand Card";
+                    BrandPage: Page "Brand List"; //o Brand Card
                 begin
                     BrandPage.Run();
                 end;
@@ -57,15 +65,19 @@ pageextension 50100 "Item Card Page Ext" extends "Item Card"
                 Caption = 'Open Flavour';
                 Image = Open;
                 ToolTip = 'Pressing this button will open the flavour page.';
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 var
-                    FlavourPage: Page "Flavour Card";
+                    FlavourPage: Page "Flavour List"; //o Flavour Card
                 begin
                     FlavourPage.Run();
                 end;
             }
         }
+
     }
 
 }

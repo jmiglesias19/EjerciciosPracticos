@@ -4,16 +4,27 @@ page 50100 "Flavour List"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = Flavour;
+    Caption = 'Flavour List';
 
     layout
     {
         area(Content)
         {
-            group(GroupName)
+            repeater(Fila)
             {
-                field(Name; NameSource)
+                field(Code; Rec.Code)
                 {
+                    Caption = 'Code';
+                }
 
+                field(Description; Rec.Description)
+                {
+                    Caption = 'Description';
+                }
+
+                field("Flavour Products"; Rec."Flavour Products")
+                {
+                    Caption = 'Flavour Products';
                 }
             }
         }
@@ -21,19 +32,6 @@ page 50100 "Flavour List"
 
     actions
     {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-
-                trigger OnAction()
-                begin
-
-                end;
-            }
-        }
     }
 
-    var
-        myInt: Integer;
 }

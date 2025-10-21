@@ -10,31 +10,43 @@ page 50102 "Brand List"
     {
         area(Content)
         {
-            group(GroupName)
+            repeater(Fila) //el repeater sirve para crear una nueva fila
             {
-                field(Name; NameSource)
+                field(Code; Rec.Code)
                 {
+                    Caption = 'Code';
+                }
+
+                field(Description; Rec.Description)
+                {
+                    Caption = 'Description';
 
                 }
+
+                field("Brand Products"; Rec."Brand Products")
+                {
+                    Caption = 'Brand Products';
+
+                }
+
+                field(Blocked; Rec.Blocked)
+                {
+                    Caption = 'Blocked';
+
+                }
+
+                field("Blockage Expiration"; Rec."Blockage Expiration")
+                {
+                    Caption = 'Blockage Expiration';
+
+                }
+
             }
         }
     }
 
     actions
     {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-
-                trigger OnAction()
-                begin
-
-                end;
-            }
-        }
     }
 
-    var
-        myInt: Integer;
 }

@@ -10,9 +10,30 @@ page 50103 "Brand Card"
     {
         area(Content)
         {
-            group(GroupName)
+            group(BrandCard)
             {
-                field(Name; NameSource)
+                Caption = 'Brand Card';
+                field(Code; Rec.Code)
+                {
+
+                }
+
+                field(Description; Rec.Description)
+                {
+
+                }
+
+                field("Brand Products"; Rec."Brand Products")
+                {
+
+                }
+
+                field(Blocked; Rec.Blocked)
+                {
+
+                }
+
+                field("Blockage Expiration"; Rec."Blockage Expiration")
                 {
 
                 }
@@ -22,19 +43,7 @@ page 50103 "Brand Card"
 
     actions
     {
-        area(Processing)
-        {
-            action(ActionName)
-            {
 
-                trigger OnAction()
-                begin
-
-                end;
-            }
-        }
     }
 
-    var
-        myInt: Integer;
 }

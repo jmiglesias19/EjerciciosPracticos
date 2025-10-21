@@ -4,14 +4,26 @@ page 50101 "Flavour Card"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = Flavour;
+    Caption = 'Flavour Card';
 
     layout
     {
         area(Content)
         {
-            group(GroupName)
+            group(FlavourCard)
             {
-                field(Name; NameSource)
+                Caption = 'Flavour Card';
+                field(Code; Rec.Code)
+                {
+
+                }
+
+                field(Description; Rec.Description)
+                {
+
+                }
+
+                field("Flavour Products"; Rec."Flavour Products")
                 {
 
                 }
@@ -21,19 +33,6 @@ page 50101 "Flavour Card"
 
     actions
     {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-
-                trigger OnAction()
-                begin
-
-                end;
-            }
-        }
     }
 
-    var
-        myInt: Integer;
 }
