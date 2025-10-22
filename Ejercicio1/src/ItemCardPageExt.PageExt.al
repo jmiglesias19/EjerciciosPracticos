@@ -1,5 +1,7 @@
 pageextension 50100 "Item Card Page Ext" extends "Item Card"
 {
+    // Permissions = tabledata Brand = r,
+    //               tabledata Flavour = r;
     layout
     {
         addlast(Item)
@@ -10,22 +12,45 @@ pageextension 50100 "Item Card Page Ext" extends "Item Card"
                 field(Brand; Rec.Brand)
                 {
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    var
+                        BrandRecord: Record "Brand";
+                    begin
+                        if Rec.Brand = '' then
+                            Rec."Brand Description" := '';
+
+                        if BrandRecord.Get(Rec.Brand) then
+                            Rec."Brand Description" := BrandRecord.Description;
+                    end;
                 }
 
                 field("Brand Description"; Rec."Brand Description")
                 {
                     ApplicationArea = All;
+                    Enabled = false;
                 }
 
                 field("Flavour"; Rec.Flavour)
                 {
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    var
+                        FlavourRecord: Record "Flavour";
+                    begin
+                        if Rec.Flavour = '' then
+                            Rec."Flavour Description" := '';
+
+                        if FlavourRecord.Get(Rec.Flavour) then
+                            Rec."Flavour Description" := FlavourRecord.Description;
+                    end;
                 }
 
                 field("Flavour Description"; Rec."Flavour Description")
                 {
                     ApplicationArea = All;
-
+                    Enabled = false;
                 }
 
                 field("Nutriscore"; Rec.Nutriscore)

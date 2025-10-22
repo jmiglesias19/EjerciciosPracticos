@@ -12,7 +12,8 @@ page 50102 "Brand List"
         {
             repeater(Fila) //el repeater sirve para crear una nueva fila
             {
-                field(Code; Rec.Code)
+                field(Code;
+                Rec.Code)
                 {
                     Caption = 'Code';
                 }
@@ -26,6 +27,7 @@ page 50102 "Brand List"
                 field("Brand Products"; Rec."Brand Products")
                 {
                     Caption = 'Brand Products';
+                    Editable = false;
 
                 }
 
@@ -38,15 +40,25 @@ page 50102 "Brand List"
                 field("Blockage Expiration"; Rec."Blockage Expiration")
                 {
                     Caption = 'Blockage Expiration';
-
+                    Editable = false;
                 }
 
             }
         }
     }
 
-    actions
-    {
-    }
+
+
+    trigger OnAfterGetRecord()
+    var
+        BrandProductsCounter: Text[10];
+    begin
+        Rec.CalcFields("Brand Products");
+
+        if Rec."Brand Products" = 0 then
+            BrandProductsCounter := '-'
+        else
+            BrandProductsCounter := Format(Rec."Brand Products");
+    end;
 
 }

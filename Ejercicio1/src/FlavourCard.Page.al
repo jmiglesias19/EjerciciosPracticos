@@ -25,7 +25,12 @@ page 50101 "Flavour Card"
 
                 field("Flavour Products"; Rec."Flavour Products")
                 {
+                    // trigger OnValidate()
+                    // var
+                    //     FlavourRecord: Record "Flavour";
+                    // begin
 
+                    // end;
                 }
             }
         }

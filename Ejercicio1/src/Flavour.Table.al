@@ -29,8 +29,8 @@ table 50100 "Flavour"
             Caption = 'Flavour Products';
             ToolTip = 'Specifies the number of products which use this flavour.';
             Editable = false;
-            // FieldClass = FlowField;
-            // CalcFormula = count(Flavour);
+            FieldClass = FlowField;
+            CalcFormula = count(Item where(Brand = field(Code)));
         }
     }
 
