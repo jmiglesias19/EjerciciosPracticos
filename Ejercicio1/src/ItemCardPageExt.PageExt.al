@@ -64,7 +64,8 @@ pageextension 50100 "Item Card Page Ext" extends "Item Card"
 
     actions
     {
-        addafter(ApplyTemplate)
+
+        addafter(Functions)
         {
             action("Open Brand")
             {

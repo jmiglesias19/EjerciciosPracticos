@@ -1,20 +1,17 @@
-tableextension 50101 "Activities Cue Table Ext" extends "Activities Cue"
+tableextension 50101 "Activities Cue Table Ext" extends "Sales Cue"
 {
     fields
     {
-        // Add changes to table fields here
+        field(50100; "Blocked Brands";
+        Integer)
+        {
+            AllowInCustomizations = Never;
+            Caption = 'Blocked Brands';
+            Editable = false;
+
+            FieldClass = FlowField;
+            CalcFormula = count(Brand where(Blocked = const(true)));
+        }
     }
 
-    keys
-    {
-        // Add changes to keys here
-    }
-
-    fieldgroups
-    {
-        // Add changes to field groups here
-    }
-
-    var
-    // myInt: Integer;
 }
