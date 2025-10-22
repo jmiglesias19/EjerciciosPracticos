@@ -27,7 +27,8 @@
   },
   "runtime": "15.2",
   "features": [
-    "NoImplicitWith"
+    "NoImplicitWith",
+    "TranslationFile"
   ]
 
 }

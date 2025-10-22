@@ -1,4 +1,4 @@
-tableextension 50101 "Activities Cue Table Ext" extends "Sales Cue"
+tableextension 50101 "Sales Cue Table Ext" extends "Sales Cue"
 {
     fields
     {
@@ -11,6 +11,7 @@ tableextension 50101 "Activities Cue Table Ext" extends "Sales Cue"
 
             FieldClass = FlowField;
             CalcFormula = count(Brand where(Blocked = const(true)));
+            ToolTip = 'Specifies the number of blocked brands.';
         }
     }
 

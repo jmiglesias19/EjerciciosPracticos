@@ -1,7 +1,5 @@
 pageextension 50100 "Item Card Page Ext" extends "Item Card"
 {
-    // Permissions = tabledata Brand = r,
-    //               tabledata Flavour = r;
     layout
     {
         addlast(Item)
