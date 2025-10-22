@@ -23,17 +23,21 @@ page 50100 "Flavour List"
                     Editable = true;
                 }
 
-                field("Flavour Products"; Rec."Flavour Products")
+                field("Flavour Products"; FlavourProductsCounter)
                 {
                     Caption = 'Flavour Products';
+                    Editable = false;
+                    ToolTip = 'Specifies the number of products which use this flavour.';
                 }
             }
         }
     }
 
-    trigger OnAfterGetRecord()
     var
         FlavourProductsCounter: Text[10];
+
+    trigger OnAfterGetRecord()
+
     begin
         Rec.CalcFields("Flavour Products");
 

@@ -24,11 +24,11 @@ page 50102 "Brand List"
 
                 }
 
-                field("Brand Products"; Rec."Brand Products")
+                field("Brand Products"; BrandProductsCounter)
                 {
                     Caption = 'Brand Products';
                     Editable = false;
-
+                    ToolTip = 'Specifies the number of products which use this brand.';
                 }
 
                 field(Blocked; Rec.Blocked)
@@ -47,11 +47,11 @@ page 50102 "Brand List"
         }
     }
 
-
-
-    trigger OnAfterGetRecord()
     var
         BrandProductsCounter: Text[10];
+
+    trigger OnAfterGetRecord()
+
     begin
         Rec.CalcFields("Brand Products");
 

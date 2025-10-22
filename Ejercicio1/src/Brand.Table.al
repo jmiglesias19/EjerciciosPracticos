@@ -29,7 +29,7 @@ table 50101 "Brand"
             Editable = false;
             ToolTip = 'Specifies the number of products which use this brand.';
             FieldClass = FlowField;
-            CalcFormula = count(Item where(Flavour = field(Code)));
+            CalcFormula = count(Item where(Brand = field(Code)));
         }
 
         field(4; Blocked; Boolean)
