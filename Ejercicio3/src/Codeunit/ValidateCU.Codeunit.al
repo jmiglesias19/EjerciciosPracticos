@@ -4,7 +4,8 @@ codeunit 50100 ValidateCU
         tabledata CustomerActivity = RIMD,
         tabledata CustomerCategory = RIMD,
         tabledata CustomerSector = RIMD,
-        tabledata CustomerType = RIMD;
+        tabledata CustomerType = RIMD,
+        tabledata Customer = RIMD;
 
     // Esta función valida el Tipo de Cliente
     procedure ValidateCustomerType(var Cust: Record Customer)
@@ -68,6 +69,27 @@ codeunit 50100 ValidateCU
                 Cust.CategoryDescription := CategoryRecord.CategoryDescription
             else
                 Cust.CategoryDescription := '';
+    end;
+
+    // Esto es lo que "engancha" la codeunit al evento.
+    // Es el sustituto del "modify".
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", "OnAfterValidateEvent", "Sell-to Customer No.", false, false)]
+    local procedure TransferCustomFieldsFromCustomer(var Rec: Record "Sales Header"; var xRec: Record "Sales Header")
+    var
+        Cust: Record Customer;
+    begin
+        if (Rec."Sell-to Customer No." <> xRec."Sell-to Customer No.") and (Rec."Sell-to Customer No." <> '') then begin
+            if Cust.Get(Rec."Sell-to Customer No.") then begin
+                Rec.Validate("SalesZone", Cust."SalesZone");
+                Rec.Validate("Route", Cust."Route");
+                Rec.Validate("TransportAgency", Cust."TransportAgency");
+            end;
+        end else
+            if (Rec."Sell-to Customer No." = '') then begin
+                Rec.Validate("SalesZone", '');
+                Rec.Validate("Route", '');
+                Rec.Validate("TransportAgency", '');
+            end;
     end;
 
 }

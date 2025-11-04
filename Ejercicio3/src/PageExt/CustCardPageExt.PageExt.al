@@ -83,6 +83,27 @@ pageextension 50100 CustCardPageExt extends "Customer Card"
                         RiskColor();
                     end;
                 }
+
+                field(SalesZone; Rec.SalesZone)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Sales Zone';
+                    Visible = true;
+                }
+
+                field(Route; Rec.Route)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Route';
+                    Visible = true;
+                }
+
+                field(TransportAgency; Rec.TransportAgency)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Transport Agency';
+                    Visible = true;
+                }
             }
         }
     }
