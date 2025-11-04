@@ -12,5 +12,9 @@ permissionset 50100 GeneratedPermission
         table CustomerCategory = X,
         table CustomerSector = X,
         table CustomerType = X,
-        page CustomerTypeList = X;
+        page ActivityList = X,
+        page CategoryList = X,
+        page CustomerTypeList = X,
+        page SectorList = X,
+        codeunit ValidateCU = X;
 }

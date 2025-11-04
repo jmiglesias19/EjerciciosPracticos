@@ -2,8 +2,8 @@ table 50101 CustomerSector
 {
     Caption = 'Customer Sector';
     DataClassification = ToBeClassified;
-    // LookupPageId = "CustomerTypeList";
-    // DrillDownPageId = "CustomerTypeList";
+    LookupPageId = "SectorList";
+    DrillDownPageId = "SectorList";
 
     fields
     {
@@ -13,6 +13,7 @@ table 50101 CustomerSector
             Caption = 'Sector';
             NotBlank = true;
             ToolTip = 'Specifies the sector.';
+            Editable = true;
         }
 
         field(2; SectorDescription; Text[50])
@@ -20,6 +21,7 @@ table 50101 CustomerSector
             AllowInCustomizations = Always;
             Caption = 'Description';
             ToolTip = 'Specifies a description of the sector.';
+            Editable = true;
         }
     }
 

@@ -2,8 +2,8 @@ table 50103 CustomerCategory
 {
     Caption = 'Customer Category';
     DataClassification = ToBeClassified;
-    // LookupPageId = "CustomerTypeList";
-    // DrillDownPageId = "CustomerTypeList";
+    LookupPageId = "CategoryList";
+    DrillDownPageId = "CategoryList";
 
     fields
     {
@@ -13,6 +13,7 @@ table 50103 CustomerCategory
             Caption = 'Category';
             NotBlank = true;
             ToolTip = 'Specifies the category.';
+            Editable = true;
         }
 
         field(2; CategoryDescription; Text[50])
@@ -20,6 +21,7 @@ table 50103 CustomerCategory
             AllowInCustomizations = Always;
             Caption = 'Description';
             ToolTip = 'Specifies a description of the category.';
+            Editable = true;
         }
     }
 

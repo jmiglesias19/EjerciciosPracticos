@@ -13,6 +13,7 @@ table 50100 CustomerType
             Caption = 'Customer type';
             NotBlank = true;
             ToolTip = 'Specifies the type of customer.';
+            Editable = true;
         }
 
         field(2; CustomerDescription; Text[50])
@@ -20,6 +21,7 @@ table 50100 CustomerType
             AllowInCustomizations = Always;
             Caption = 'Description';
             ToolTip = 'Specifies a description of the customer type.';
+            Editable = true;
         }
     }
 

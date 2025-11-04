@@ -10,13 +10,19 @@ page 50100 CustomerTypeList
     {
         area(Content)
         {
-            group(Ejercicio3)
+            repeater(Ejercicio3)
             {
                 Caption = 'Ejercicio 3';
-
-
+                field(CustomerType; Rec.CustomerType)
+                {
+                    Caption = 'Customer Type';
+                }
+                field(CustomerDescription; Rec.CustomerDescription)
+                {
+                    Caption = 'Description';
+                }
             }
         }
-    }
 
+    }
 }

@@ -2,8 +2,8 @@ table 50102 CustomerActivity
 {
     Caption = 'Customer Activity';
     DataClassification = ToBeClassified;
-    // LookupPageId = "CustomerTypeList";
-    // DrillDownPageId = "CustomerTypeList";
+    LookupPageId = "ActivityList";
+    DrillDownPageId = "ActivityList";
 
     fields
     {
@@ -13,6 +13,7 @@ table 50102 CustomerActivity
             Caption = 'Activity';
             NotBlank = true;
             ToolTip = 'Specifies the activity.';
+            Editable = true;
         }
 
         field(2; ActivityDescription; Text[50])
@@ -20,6 +21,7 @@ table 50102 CustomerActivity
             AllowInCustomizations = Always;
             Caption = 'Description';
             ToolTip = 'Specifies a description of the activity.';
+            Editable = true;
         }
     }
 
