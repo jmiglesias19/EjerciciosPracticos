@@ -7,17 +7,12 @@ enum 50102 BetaEnum
         Caption = ' ', Locked = true;
     }
 
-    value(1; "White")
-    {
-        Caption = 'White';
-    }
-
-    value(2; "Length")
+    value(1; "Length")
     {
         Caption = 'Length';
     }
 
-    value(3; "Width")
+    value(2; "Width")
     {
         Caption = 'Width';
     }

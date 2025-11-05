@@ -38,8 +38,6 @@ tableextension 50100 ItemCategoryTableExt extends "Item Category"
             AllowInCustomizations = Always;
             Caption = 'Surface';
             Editable = false;
-            // FieldClass = FlowField;
-            // CalcFormula = sum("Item Category".Surface where(Subfamily = field(Subfamily)));
         }
         field(50106; Density; Integer)
         {

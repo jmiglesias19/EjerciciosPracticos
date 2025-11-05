@@ -1,9 +1,10 @@
-namespace Permissions;
+// namespace Permissions;
 
 permissionset 50100 GeneratedPermission
 {
-    Caption = 'Generated Permissions', MaxLength = 30;
+    Caption = 'Generated Permission Set', MaxLength = 30;
     Assignable = true;
     Permissions = tabledata Qualities = RIMD,
-        table Qualities = X;
+        table Qualities = X,
+        page QualitiesPage = X;
 }

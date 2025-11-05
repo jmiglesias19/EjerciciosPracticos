@@ -2,11 +2,6 @@ enum 50101 VetaEnum
 {
     Extensible = true;
 
-    value(0; " ")
-    {
-        Caption = ' ', Locked = true;
-    }
-
     value(1; "L")
     {
         Caption = 'L';
@@ -17,8 +12,8 @@ enum 50101 VetaEnum
         Caption = 'A';
     }
 
-    value(3; "O")
+    value(3; "0")
     {
-        Caption = 'O';
+        Caption = '0';
     }
 }
