@@ -16,7 +16,7 @@ pageextension 50100 VendorListPageExt extends "Vendor List"
 
                 trigger OnAction()
                 var
-                    VendorCertificatesPage: Page "VendorCertificates";
+                    VendorCertificatesPage: Page "VendorCertificatesList";
                 begin
                     VendorCertificatesPage.Run();
                 end;
