@@ -3,6 +3,7 @@ table 50101 VendorCertificatesHeader
     Caption = 'Vendor Certificates Header';
     LookupPageId = VendorCertificateDocument;
     DrillDownPageId = VendorCertificateDocument;
+    Permissions = tabledata VendorCertificatesHeader = r;
 
     fields
     {
@@ -20,6 +21,13 @@ table 50101 VendorCertificatesHeader
             DataClassification = ToBeClassified;
             Caption = 'Certificate Type';
             ToolTip = 'Specifies the type of the vendor certificate.';
+
+            trigger OnValidate()
+            var
+
+            begin
+
+            end;
         }
 
         field(3; IssueDate; Date)
@@ -30,7 +38,7 @@ table 50101 VendorCertificatesHeader
 
             trigger OnValidate()
             begin
-                CheckWorkDate();
+                CheckWorkDateAndActive();
             end;
         }
 
@@ -41,7 +49,7 @@ table 50101 VendorCertificatesHeader
             ToolTip = 'Specifies the expiration date of the vendor certificate.';
             trigger OnValidate()
             begin
-                CheckWorkDate();
+                CheckWorkDateAndActive();
             end;
         }
 
@@ -53,12 +61,20 @@ table 50101 VendorCertificatesHeader
             Editable = false;
         }
 
-        field(6; Attached; Blob)
+        // field(6; Attached; Blob)
+        // {
+        //     // Subtype = ;
+        //     DataClassification = ToBeClassified;
+        //     Caption = 'Attached';
+        //     ToolTip = 'Specifies any attachments related to the vendor certificate.';
+        // }
+
+        field(7; VendorCode; Code[20])
         {
-            Subtype = Bitmap;
             DataClassification = ToBeClassified;
-            Caption = 'Attached';
-            ToolTip = 'Specifies any attachments related to the vendor certificate.';
+            Caption = 'Vendor Code';
+            ToolTip = 'Specifies the vendor code.';
+            TableRelation = Vendor;
         }
     }
 
@@ -81,23 +97,22 @@ table 50101 VendorCertificatesHeader
         }
     }
 
-    local procedure CheckWorkDate()
+    local procedure CheckWorkDateAndActive()
     var
-        IsInRange: Boolean;
+        VCHRec: Record VendorCertificatesHeader;
     begin
         Active := false;
-        if (IssueDate <> 0D) and (ExpirationDate <> 0D) then
-            IsInRange := (WorkDate() >= IssueDate) and (WorkDate() <= ExpirationDate);
+        if (WorkDate() >= IssueDate) and (WorkDate() <= ExpirationDate) then begin
+            VCHRec.SetRange(VendorCode, Rec.VendorCode);
+            VCHRec.SetRange(Active, true);
+            VCHRec.SetFilter(CertificateCode, '<>%1', CertificateCode);
+            if VCHRec.IsEmpty() then
+                Active := true;
 
-        // if IsInRange and (not Active) then
-        //     CheckActive();
-        Active := IsInRange;
+
+        end;
+
+
     end;
 
-    // local procedure CheckActive()
-    // var
-    //     myInt: Integer;
-    // begin
-
-    // end;
 }

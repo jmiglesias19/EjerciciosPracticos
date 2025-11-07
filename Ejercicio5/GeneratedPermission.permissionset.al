@@ -10,5 +10,6 @@ permissionset 50100 GeneratedPermission
         table VendorCertificatesLines = X,
         page VendorCertificateDocument = X,
         page VendorCertificateListPart = X,
-        page VendorCertificatesList = X;
+        page VendorCertificatesList = X,
+        codeunit QuantityValidation = X;
 }

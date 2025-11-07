@@ -50,5 +50,13 @@ tableextension 50100 VendorTableExt extends Vendor
             Caption = 'Attached';
             ToolTip = 'Specifies any attachments related to the vendor certificate.';
         }
+
+        field(50106; Approved; Boolean)
+        {
+            AllowInCustomizations = Always;
+            Caption = 'Approved';
+            DataClassification = ToBeClassified;
+            ToolTip = 'Specifies if the vendor is approved.';
+        }
     }
 }

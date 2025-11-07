@@ -13,6 +13,11 @@ page 50101 VendorCertificateDocument
             group(Header)
             {
                 Caption = 'Header';
+
+                field(VendorCode; Rec.VendorCode)
+                {
+                    Caption = 'Vendor Code';
+                }
                 field(CertificateCode; Rec.CertificateCode)
                 {
                     Caption = 'Certificate Code';
@@ -38,10 +43,10 @@ page 50101 VendorCertificateDocument
                     Caption = 'Active';
                 }
 
-                field(Attached; Rec.Attached)
-                {
-                    Caption = 'Attached';
-                }
+                // field(Attached; Rec.Attached)
+                // {
+                //     Caption = 'Attached';
+                // }
             }
 
             group(Lines)
@@ -53,6 +58,28 @@ page 50101 VendorCertificateDocument
                     SubPageLink = CertificateCode = field(CertificateCode);
                 }
             }
+
+
+        }
+
+        area(FactBoxes)
+        {
+            part("Attached Documents List"; "Doc. Attachment List Factbox")
+            {
+                Caption = 'Documents';
+                UpdatePropagation = Both;
+
+                SubPageLink = "Table ID" = const(Database::"VendorCertificatesHeader"),
+                              "No." = field(CertificateCode);
+            }
+            systempart(Links; Links)
+            {
+            }
+            systempart(Notes; Notes)
+            {
+            }
+
+
         }
     }
 

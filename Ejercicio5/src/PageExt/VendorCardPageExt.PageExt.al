@@ -2,50 +2,14 @@ pageextension 50101 VendorCardPageExt extends "Vendor Card"
 {
     layout
     {
-        // addafter(General)
-        // {
-        //     group(Ejercicio5)
-        //     {
-        //         Caption = 'Ejercicio 5';
-
-        //         field(CertificateCode; Rec.CertificateCode)
-        //         {
-        //             ApplicationArea = All;
-        //             Caption = 'Certificate Code';
-        //         }
-
-        //         field(CertificateType; Rec.CertificateType)
-        //         {
-        //             ApplicationArea = All;
-        //             Caption = 'Certificate Type';
-        //         }
-
-        //         field(IssueDate; Rec.IssueDate)
-        //         {
-        //             ApplicationArea = All;
-        //             Caption = 'Issue Type';
-        //         }
-
-        //         field(ExpirationDate; Rec.ExpirationDate)
-        //         {
-        //             ApplicationArea = All;
-        //             Caption = 'Expiration Date';
-        //         }
-
-        //         field(Active; Rec.Active)
-        //         {
-        //             ApplicationArea = All;
-        //             Caption = 'Active';
-        //         }
-
-        //         field(Attached; Rec.Attached)
-        //         {
-        //             ApplicationArea = All;
-        //             Caption = 'Attached';
-        //         }
-
-        //     }
-        // }
+        addlast(General)
+        {
+            field(Approved; Rec.Approved)
+            {
+                ApplicationArea = All;
+                Caption = 'Approved';
+            }
+        }
     }
 
     actions
@@ -64,12 +28,19 @@ pageextension 50101 VendorCardPageExt extends "Vendor Card"
 
                 trigger OnAction()
                 var
+                    VendorCertificate: Record VendorCertificatesHeader;
                     VendorCertificatesPage: Page "VendorCertificatesList";
                 begin
-                    VendorCertificatesPage.Run();
+                    VendorCertificate.SetRange(VendorCode, Rec."No.");
+                    VendorCertificatesPage.SetTableView(VendorCertificate);
+                    VendorCertificatesPage.SetDefaultVendor(Rec."No.");
+                    VendorCertificatesPage.RunModal();
                 end;
+
             }
         }
+
+
     }
 
 }

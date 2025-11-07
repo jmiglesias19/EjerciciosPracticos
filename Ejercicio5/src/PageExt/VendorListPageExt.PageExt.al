@@ -21,7 +21,6 @@ pageextension 50100 VendorListPageExt extends "Vendor List"
                     VendorCertificatesPage.Run();
                 end;
             }
-
         }
     }
 
