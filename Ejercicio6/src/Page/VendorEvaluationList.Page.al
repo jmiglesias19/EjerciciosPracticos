@@ -6,6 +6,7 @@ page 50102 VendorEvaluationList
     UsageCategory = Lists;
     SourceTable = VendorEvaluationHeader;
     CardPageId = VendorEvaluationCardDocument;
+    SourceTableView = where(Archived = const(false));
 
     layout
     {
@@ -48,6 +49,25 @@ page 50102 VendorEvaluationList
                 {
 
                 }
+            }
+        }
+    }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(Archive)
+            {
+                Caption = 'Archived Evaluations';
+                Image = Archive;
+                ToolTip = 'Button used to open the archived evaluations page.';
+                trigger OnAction()
+                var
+                    VEARec: Page VendorEvaluationsArchived;
+                begin
+                    VEARec.Run();
+                end;
             }
         }
     }

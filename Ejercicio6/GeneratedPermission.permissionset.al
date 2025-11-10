@@ -6,10 +6,13 @@ permissionset 50100 GeneratedPermission
     Assignable = true;
     Permissions = tabledata VendorEvaluationHeader = RIMD,
         tabledata VendorEvaluationLines = RIMD,
+        tabledata EvaluationCriteria = RIMD,
         table VendorEvaluationHeader = X,
         table VendorEvaluationLines = X,
+        table EvaluationCriteria = X,
         page VendorEvaluationCardDocument = X,
         page VendorEvaluationList = X,
         page VendorEvaluationListSubform = X,
-        page VendorEvaluationsArchived = X;
+        page VendorEvaluationsArchived = X,
+        page EvaluationCriteriaList = X;
 }

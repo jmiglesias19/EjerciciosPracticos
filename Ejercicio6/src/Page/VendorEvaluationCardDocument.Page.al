@@ -5,6 +5,7 @@ page 50100 VendorEvaluationCardDocument
     ApplicationArea = All;
     UsageCategory = Documents;
     SourceTable = VendorEvaluationHeader;
+    SourceTableView = where(Archived = const(false));
 
     layout
     {
@@ -15,7 +16,7 @@ page 50100 VendorEvaluationCardDocument
                 Caption = 'Vendor Evaluation Header';
                 field("EvaluationNo"; Rec."EvaluationNo")
                 {
-
+                    ShowMandatory = true;
                 }
 
                 field(EvaluationDate; Rec."EvaluationDate")
@@ -35,7 +36,7 @@ page 50100 VendorEvaluationCardDocument
 
                 field(VendorNo; Rec.VendorNo)
                 {
-
+                    ShowMandatory = true;
                 }
 
                 field(VendorName; Rec.VendorName)
@@ -61,9 +62,44 @@ page 50100 VendorEvaluationCardDocument
 
             part(VendorEvaluationListSubform; VendorEvaluationListSubform)
             {
-                SubPageLink = CriterionCode = field(EvaluationNo);
+                // SubPageLink = CriterionCode = field(EvaluationNo);
             }
 
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(Archive)
+            {
+                ApplicationArea = All;
+                Caption = 'Archive';
+                Image = Archive;
+                ToolTip = 'Button used to archive an evaluation.';
+
+                trigger OnAction()
+                var
+                    VEARec: Page VendorEvaluationsArchived;
+                    OpenArchivedListMsg: Label 'Evaluation %1 has been archived. Do you want to open the archived evaluations list?';
+                begin
+                    if Rec.Archived then begin
+                        Message('This document is already archived.');
+                        exit;
+                    end;
+
+                    Rec.Validate(Archived, true);
+                    Rec.Validate(ArchiveDate, Today());
+                    Rec.Modify(true);
+
+                    if Confirm(OpenArchivedListMsg, true, Rec."EvaluationNo") then
+                        VEARec.Run();
+
+                    CurrPage.Close();
+                end;
+            }
+        }
+    }
+
 }

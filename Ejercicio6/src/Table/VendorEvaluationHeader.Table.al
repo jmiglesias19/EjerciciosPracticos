@@ -61,6 +61,13 @@ table 50100 VendorEvaluationHeader
             TableRelation = "User Setup"."User ID";
             ToolTip = 'Specifies the responsible user.';
         }
+
+        field(10; Archived; Boolean)
+        {
+            AllowInCustomizations = Always;
+            Caption = 'Archived';
+            ToolTip = 'Specifies if the evaluation is archived.';
+        }
     }
 
     keys
