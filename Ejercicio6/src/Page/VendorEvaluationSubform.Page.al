@@ -1,6 +1,6 @@
-page 50101 VendorEvaluationList
+page 50101 VendorEvaluationSubform
 {
-    Caption = 'Vendor Evaluation List';
+    Caption = 'Vendor Evaluation Subform';
     PageType = ListPart;
     ApplicationArea = All;
     UsageCategory = Lists;

@@ -2,8 +2,8 @@ table 50101 VendorEvaluationLines
 {
     Caption = 'Vendor Evaluation Lines';
     DataClassification = ToBeClassified;
-    LookupPageId = VendorEvaluationList;
-    DrillDownPageId = VendorEvaluationList;
+    LookupPageId = VendorEvaluationSubform;
+    DrillDownPageId = VendorEvaluationSubform;
 
     fields
     {

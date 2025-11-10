@@ -11,5 +11,6 @@ permissionset 50100 GeneratedPermission
         table VendorEvaluationLines = X,
         table EvaluationCriterion = X,
         page VendorEvaluationCard = X,
-        page VendorEvaluationList = X;
+        page VendorEvaluationSubform = X,
+        page EvaluationCriterionList = X;
 }

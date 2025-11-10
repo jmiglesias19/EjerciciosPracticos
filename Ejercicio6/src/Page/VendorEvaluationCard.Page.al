@@ -17,7 +17,7 @@ page 50100 VendorEvaluationCard
                 field("No."; Rec."No.")
                 {
                     Caption = 'No.';
-                    Editable = false;
+                    Editable = false; //false
                 }
                 field("EvaluationDate"; Rec."EvaluationDate")
                 {
@@ -55,9 +55,13 @@ page 50100 VendorEvaluationCard
 
             }
 
-            part(VendorEvaluationList; VendorEvaluationList)
+            group(Lines)
             {
-
+                Caption = 'Vendor Evaluation List';
+                part(VendorEvaluationList; VendorEvaluationSubform)
+                {
+                    SubPageLink = Criterion = field("No.");
+                }
             }
 
         }

@@ -2,7 +2,15 @@ pageextension 50100 VendorCardPE extends "Vendor Card"
 {
     layout
     {
-        // Add changes to page layout here
+        // addlast(General)
+        // {
+        //     field("No. Serie"; Rec."No. Series")
+        //     {
+        //         ApplicationArea = All;
+        //         Caption = 'No. Serie';
+        //         Editable = true;
+        //     }
+        // }
     }
 
     actions
