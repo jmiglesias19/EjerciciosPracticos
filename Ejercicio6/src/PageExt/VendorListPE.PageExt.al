@@ -1,4 +1,4 @@
-pageextension 50101 VendorCardPE extends "Vendor Card"
+pageextension 50100 VendorListPE extends "Vendor List"
 {
 
     actions
@@ -12,16 +12,12 @@ pageextension 50101 VendorCardPE extends "Vendor Card"
                 Image = Evaluate;
                 ToolTip = 'Open the evaluation list page.';
                 Promoted = true;
-                PromotedCategory = Category9;
+                PromotedCategory = Category5;
                 PromotedIsBig = true;
                 trigger OnAction()
                 var
-                    VEHRec: Record VendorEvaluationHeader;
                     VELRec: Page VendorEvaluationList;
                 begin
-                    VEHRec.SetRange(VendorNo, Rec."No.");
-                    VELRec.SetTableView(VEHRec);
-                    VELRec.SetDefaultVendor(Rec."No.");
                     VELRec.Run();
                 end;
             }

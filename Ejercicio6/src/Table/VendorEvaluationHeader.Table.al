@@ -1,26 +1,26 @@
 table 50100 VendorEvaluationHeader
 {
     Caption = 'Vendor Evaluation Header';
-    LookupPageId = "VendorEvaluationCard";
-    DrillDownPageId = "VendorEvaluationCard";
-    Permissions = tabledata VendorEvaluationHeader = r;
+    DataClassification = ToBeClassified;
+    DrillDownPageId = VendorEvaluationCardDocument;
+    LookupPageId = VendorEvaluationCardDocument;
+
 
     fields
     {
-        field(1; "No."; Code[20])
+        field(1; "EvaluationNo"; Code[20])
         {
-            Caption = 'No.';
+            Caption = 'Evaluation Number';
             NotBlank = true;
-            TableRelation = "No. Series";
-            ToolTip = 'Specifies  the evaluation number.';
+            TableRelation = "No. Series".Code;
+            ToolTip = 'Specifies the vendor evaluation number.';
         }
         field(2; "EvaluationDate"; Date)
         {
-            AllowInCustomizations = Always;
             Caption = 'Evaluation Date';
             ToolTip = 'Specifies the evaluation date.';
         }
-        field(3; "Archive Date"; Date)
+        field(3; "ArchiveDate"; Date)
         {
             Caption = 'Archive Date';
             ToolTip = 'Specifies the archive date.';
@@ -30,30 +30,30 @@ table 50100 VendorEvaluationHeader
             Caption = 'Blocked';
             ToolTip = 'Specifies if the evaluation is blocked.';
         }
-        field(5; "Vendor No."; Code[20])
+        field(5; "VendorNo"; Code[20])
         {
-            Caption = 'Vendor No.';
-            TableRelation = Vendor;
+            Caption = 'Vendor Number';
+            TableRelation = Vendor."No.";
             ToolTip = 'Specifies the vendor number.';
         }
-        field(6; "Vendor Name"; Text[100])
+        field(6; "VendorName"; Text[100])
         {
             Caption = 'Vendor Name';
-            FieldClass = FlowField;
-            CalcFormula = lookup(Vendor.Name where("No." = field("Vendor No.")));
-            Editable = false;
             ToolTip = 'Specifies the vendor name.';
+            FieldClass = FlowField;
+            CalcFormula = lookup(Vendor.Name where("No." = field(VendorNo)));
+            Editable = false;
         }
-        field(7; "OperationDescription"; Text[250])
+        field(7; "OtherAspects"; Text[250])
         {
-            Caption = 'Operation Description';
-            // Subtype = Memo;
-            ToolTip = 'Specifies the operation description.';
+            Caption = 'Other Aspects';
+            ToolTip = 'Specifies other aspects.';
+
         }
         field(8; "Result"; Enum "VendorEvaluationResult")
         {
             Caption = 'Result';
-            ToolTip = 'Specifies the result of the evaluation.';
+            ToolTip = 'Specifies the evaluation result.';
         }
         field(9; "Responsible"; Code[50])
         {
@@ -65,23 +65,22 @@ table 50100 VendorEvaluationHeader
 
     keys
     {
-        key(Key1; "No.")
+        key(key1; "EvaluationNo")
         {
             Clustered = true;
         }
-        // key(Key2; "Vendor No.")
-        // {
-        // }
     }
 
     fieldgroups
     {
-        fieldgroup(DropDown; "No."/* , "Vendor Name" */)
+        fieldgroup(Brick; "EvaluationNo")
         {
-        }
-        fieldgroup(Brick; "No."/* , "Vendor No.", "Vendor Name", "Result" */)
-        {
+
         }
 
+        fieldgroup(DropDown; "EvaluationNo")
+        {
+
+        }
     }
 }

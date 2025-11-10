@@ -2,16 +2,14 @@ table 50101 VendorEvaluationLines
 {
     Caption = 'Vendor Evaluation Lines';
     DataClassification = ToBeClassified;
-    LookupPageId = VendorEvaluationSubform;
-    DrillDownPageId = VendorEvaluationSubform;
 
     fields
     {
-        field(1; Criterion; Code[20])
+        field(1; CriterionCode; Code[20])
         {
             AllowInCustomizations = Always;
-            Caption = 'Criterion';
-            ToolTip = 'Specifies the criterion of the evaluation.';
+            Caption = 'Criterion Code';
+            ToolTip = 'Specifies the criterion code of the evaluation.';
             NotBlank = true;
         }
 
@@ -39,7 +37,7 @@ table 50101 VendorEvaluationLines
 
     keys
     {
-        key(Key1; Criterion)
+        key(Key1; CriterionCode)
         {
             Clustered = true;
         }
@@ -47,11 +45,17 @@ table 50101 VendorEvaluationLines
 
     fieldgroups
     {
-        fieldgroup(Brick; Criterion)
-        { }
+        fieldgroup(Brick; CriterionCode)
+        {
 
-        fieldgroup(DropDown; Criterion)
-        { }
+        }
+
+        fieldgroup(DropDown; CriterionCode)
+        {
+
+        }
     }
+
+
 
 }
