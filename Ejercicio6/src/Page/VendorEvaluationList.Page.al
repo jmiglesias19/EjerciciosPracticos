@@ -62,12 +62,8 @@ page 50102 VendorEvaluationList
                 Caption = 'Archived Evaluations';
                 Image = Archive;
                 ToolTip = 'Button used to open the archived evaluations page.';
-                trigger OnAction()
-                var
-                    VEARec: Page VendorEvaluationsArchived;
-                begin
-                    VEARec.Run();
-                end;
+
+                RunObject = page VendorEvaluationsArchived;
             }
         }
     }

@@ -4,7 +4,7 @@ table 50100 VendorEvaluationHeader
     DataClassification = ToBeClassified;
     DrillDownPageId = VendorEvaluationCardDocument;
     LookupPageId = VendorEvaluationCardDocument;
-
+    Permissions = tabledata VendorEvaluationHeader = rm;
 
     fields
     {
@@ -35,6 +35,14 @@ table 50100 VendorEvaluationHeader
             Caption = 'Vendor Number';
             TableRelation = Vendor."No.";
             ToolTip = 'Specifies the vendor number.';
+            NotBlank = true;
+
+            trigger OnValidate()
+            begin
+                if (Rec.VendorNo <> '') and (Rec.Archived = false) then
+                    if checkActiveEvalExists(Rec."VendorNo", Rec."EvaluationNo") then
+                        Error(ActiveErrorLbl, Rec."VendorNo");
+            end;
         }
         field(6; "VendorName"; Text[100])
         {
@@ -67,6 +75,27 @@ table 50100 VendorEvaluationHeader
             AllowInCustomizations = Always;
             Caption = 'Archived';
             ToolTip = 'Specifies if the evaluation is archived.';
+
+            trigger OnValidate()
+            var
+                ConfirmManagement: Codeunit "Confirm Management";
+                DefaultAnswer: Boolean;
+                Question: Text;
+            begin
+                if Rec.Archived = false then begin
+                    if checkActiveEvalExists(Rec."VendorNo", Rec."EvaluationNo") then begin
+                        DefaultAnswer := true;
+                        Question := StrSubstNo(ArchiveExistingQst, Rec."VendorNo");
+
+                        if ConfirmManagement.GetResponseOrDefault(Question, DefaultAnswer) then
+                            ArchiveActiveEvaluation(Rec."VendorNo")
+                        else
+                            Error(UnarchiveCancelledErr);
+                    end;
+                    Rec."ArchiveDate" := 0D;
+                end else
+                    Rec."ArchiveDate" := Today();
+            end;
         }
     }
 
@@ -90,4 +119,41 @@ table 50100 VendorEvaluationHeader
 
         }
     }
+
+    trigger OnInsert()
+    begin
+        if (Rec.Archived = false) and (Rec.VendorNo <> '') then
+            if checkActiveEvalExists(Rec."VendorNo", Rec."EvaluationNo") then
+                Error(ActiveErrorLbl, Rec."VendorNo");
+    end;
+
+    procedure checkActiveEvalExists(VendorNumber: Code[20]; CurrentEvalNo: Code[20]): Boolean
+    var
+        VEHRec: Record VendorEvaluationHeader;
+    begin
+        VEHRec.SetRange("VendorNo", VendorNumber);
+        VEHRec.SetRange(Archived, false);
+        VEHRec.SetFilter("EvaluationNo", '<>%1', CurrentEvalNo);
+        exit(not VEHRec.IsEmpty());
+    end;
+
+    local procedure ArchiveActiveEvaluation(VendorNumber: Code[20])
+    var
+        VEHRec: Record VendorEvaluationHeader;
+    begin
+        VEHRec.SetRange("VendorNo", VendorNumber);
+        VEHRec.SetRange(Archived, false);
+
+        if VEHRec.FindFirst() then begin
+            VEHRec.Validate(Archived, true);
+            VEHRec.Modify(true);
+        end;
+    end;
+
+    var
+        ActiveErrorLbl: Label 'Vendor %1 already has an active evaluation.', Comment = 'Indicates that Vendor %1 have an active evaluation.';
+
+        ArchiveExistingQst: Label 'Vendor %1 already has an active evaluation. Do you want to archive it and active the current one?', Comment = 'Vendor %1 already has an active evaluation. Do you want to archive it and active the current one?';
+        UnarchiveCancelledErr: Label 'Cancelled action. The vendor active evaluation has not been modified.';
+
 }
