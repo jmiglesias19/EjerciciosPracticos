@@ -82,7 +82,7 @@ page 50100 VendorEvaluationCardDocument
                 trigger OnAction()
                 var
                     VEARec: Page VendorEvaluationsArchived;
-                    OpenArchivedListMsg: Label 'Evaluation %1 has been archived. Do you want to open the archived evaluations list?';
+                    OpenArchivedListMsg: Label 'Evaluation %1 has been archived. Do you want to open the archived evaluations list?', Comment = 'Confirmation to open archived evaluations list where evaluation %1 has been archived.';
                 begin
                     if Rec.Archived then begin
                         Message('This document is already archived.');

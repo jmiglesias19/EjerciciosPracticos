@@ -75,7 +75,7 @@ page 50103 VendorEvaluationsArchived
                 trigger OnAction()
                 var
                     VEAList: Page VendorEvaluationList;
-                    OpenEvaluationListMsg: Label 'Evaluation %1 has been un-archived. Do you want to open the main evaluation list?';
+                    OpenEvaluationListMsg: Label 'Evaluation %1 has been un-archived. Do you want to open the main evaluation list?', Comment = 'Confirmation to open evaluations list where evaluation %1 has been un-archived.';
                 begin
                     if not Rec.Archived then begin
                         Message('This document is not archived.');
