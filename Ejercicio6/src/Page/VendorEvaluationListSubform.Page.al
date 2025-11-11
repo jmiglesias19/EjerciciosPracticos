@@ -15,7 +15,6 @@ page 50101 VendorEvaluationListSubform
                 Caption = 'Vendor Evaluation Lines';
                 field(CriterionCode; Rec.CriterionCode)
                 {
-                    Editable = false;
                 }
 
                 field(Good; Rec.Good)

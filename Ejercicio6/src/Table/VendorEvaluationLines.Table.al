@@ -1,5 +1,6 @@
 table 50101 VendorEvaluationLines
 {
+    Permissions = tabledata VendorEvaluationHeader = rm;
     Caption = 'Vendor Evaluation Lines';
     DataClassification = ToBeClassified;
 
@@ -12,6 +13,18 @@ table 50101 VendorEvaluationLines
             ToolTip = 'Specifies the criterion code of the evaluation.';
             NotBlank = true;
             TableRelation = EvaluationCriteria.CriteriaCode;
+
+            trigger OnValidate()
+            var
+                VEHRec: Record VendorEvaluationHeader;
+            begin
+                if Rec.CriterionCode <> '' then
+                    if VEHRec.Get(Rec."EvaluationNumber") then
+                        if VEHRec.Result <> VEHRec.Result::"In Testing" then begin
+                            VEHRec.Result := VEHRec.Result::"In Testing";
+                            VEHRec.Modify(true);
+                        end;
+            end;
         }
 
         field(2; Good; Boolean)
@@ -35,19 +48,19 @@ table 50101 VendorEvaluationLines
             ToolTip = 'Specifies if the evaluation was bad.';
         }
 
-        // field(6; EvaluationNumber; Code[20])
-        // {
-        //     AllowInCustomizations = Always;
-        //     Caption = 'Evaluation number';
-        //     ToolTip = 'Specifies the evaluation number.';
-        //     TableRelation = VendorEvaluationHeader.EvaluationNo;
-        //     NotBlank = true;
-        // }
+        field(6; EvaluationNumber; Code[20])
+        {
+            AllowInCustomizations = Always;
+            Caption = 'Evaluation number';
+            ToolTip = 'Specifies the evaluation number.';
+            TableRelation = VendorEvaluationHeader.EvaluationNo;
+            NotBlank = true;
+        }
     }
 
     keys
     {
-        key(Key1; CriterionCode/* , EvaluationNumber */)
+        key(Key1; EvaluationNumber, CriterionCode)
         {
             Clustered = true;
         }

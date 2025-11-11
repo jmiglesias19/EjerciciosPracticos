@@ -24,10 +24,10 @@ page 50100 VendorEvaluationCardDocument
 
                 }
 
-                field(ArchiveDate; Rec.ArchiveDate)
-                {
+                // field(ArchiveDate; Rec.ArchiveDate)
+                // {
 
-                }
+                // }
 
                 field(Blocked; Rec.Blocked)
                 {
@@ -62,7 +62,7 @@ page 50100 VendorEvaluationCardDocument
 
             part(VendorEvaluationListSubform; VendorEvaluationListSubform)
             {
-                // SubPageLink = CriterionCode = field(EvaluationNo);
+                SubPageLink = EvaluationNumber = field(EvaluationNo);
             }
 
         }
